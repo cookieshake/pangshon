@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+Usage: test <image> <file> [--path /] [--method POST] [--status 200] [--contains <text>] [--keep] [--timeout 30]
+
+Starts the image, waits for readiness, then sends a request using the body from <file>.
+By default checks only HTTP status (200). Use --contains to assert response body contains text.
+
+Examples:
+  test template-python tests/payload.json
+  test template-python tests/payload.json --status 200 --contains hello
+  test template-python tests/payload.json --path / --method POST --keep
+USAGE
+}
+
+if [[ ${1:-} == "-h" || ${1:-} == "--help" || $# -lt 2 ]]; then
+  usage; exit 0
+fi
+
+IMAGE="$1"; shift
+FILE="$1"; shift
+
+TARGET_PATH="/"
+METHOD="POST"
+EXPECT_STATUS="200"
+CONTAINS=""
+KEEP=0
+TIMEOUT="30"
+CONTAINER_PORT="${CONTAINER_PORT:-8080}"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --path) TARGET_PATH="$2"; shift 2 ;;
+    --method) METHOD="$2"; shift 2 ;;
+    --status) EXPECT_STATUS="$2"; shift 2 ;;
+    --contains) CONTAINS="$2"; shift 2 ;;
+    --keep) KEEP=1; shift 1 ;;
+    --timeout) TIMEOUT="$2"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; usage; exit 1 ;;
+  esac
+done
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "docker not found. Please install and start Docker." >&2
+  exit 1
+fi
+if ! command -v curl >/dev/null 2>&1; then
+  echo "curl is required." >&2
+  exit 1
+fi
+if [[ ! -f "$FILE" ]]; then
+  echo "Test file not found: $FILE" >&2
+  exit 1
+fi
+
+PAYLOAD="$(cat "$FILE")"
+
+CONTAINER_NAME="test-$(echo "$IMAGE" | tr '/:' '__')-$(date +%s)"
+echo "Starting '$IMAGE' as '$CONTAINER_NAME' (container port $CONTAINER_PORT, host port auto)..."
+docker run -d --rm --name "$CONTAINER_NAME" -e PORT="$CONTAINER_PORT" -p :"$CONTAINER_PORT" "$IMAGE" >/dev/null
+
+# Determine host port mapping
+HOST_PORT=""
+for i in {1..20}; do
+  mapping=$(docker port "$CONTAINER_NAME" "$CONTAINER_PORT/tcp" 2>/dev/null || true)
+  if [[ -n "$mapping" ]]; then
+    HOST_PORT="$(echo "$mapping" | awk -F: '{print $NF}' | tr -cd '0-9')"
+    break
+  fi
+  sleep 0.2
+done
+if [[ -z "$HOST_PORT" ]]; then
+  echo "Failed to determine mapped host port" >&2
+  docker logs "$CONTAINER_NAME" || true
+  docker stop "$CONTAINER_NAME" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+# Wait for readiness on /
+echo -n "Waiting for http://localhost:$HOST_PORT/ (timeout ${TIMEOUT}s) ..."
+SECONDS=0
+until curl -fsS -o /dev/null "http://localhost:$HOST_PORT/"; do
+  if (( SECONDS >= TIMEOUT )); then
+    echo "\nServer did not become ready in ${TIMEOUT}s" >&2
+    docker logs "$CONTAINER_NAME" || true
+    docker stop "$CONTAINER_NAME" >/dev/null 2>&1 || true
+    exit 1
+  fi
+  echo -n "."; sleep 0.5
+done
+echo " ready"
+
+URL="http://localhost:$HOST_PORT$TARGET_PATH"
+echo "Request: $METHOD $URL from $FILE"
+
+TMP_BODY="$(mktemp)"
+trap 'rm -f "$TMP_BODY"' EXIT
+
+EXTRA_ARGS=()
+if [[ "$METHOD" =~ ^(?i:POST|PUT|PATCH)$ ]]; then
+  EXTRA_ARGS+=(-H 'Content-Type: application/json' --data "$PAYLOAD")
+fi
+
+HTTP_CODE=$(curl -sS -o "$TMP_BODY" -w "%{http_code}" -X "$METHOD" "${EXTRA_ARGS[@]}" "$URL") || true
+
+BODY="$(cat "$TMP_BODY")"
+
+RESULT=0
+if [[ "$HTTP_CODE" != "$EXPECT_STATUS" ]]; then
+  echo "[FAIL] Expected status $EXPECT_STATUS, got $HTTP_CODE" >&2
+  RESULT=1
+else
+  echo "[OK] Status $HTTP_CODE"
+fi
+
+if [[ "$RESULT" -eq 0 && -n "$CONTAINS" ]]; then
+  if ! grep -q --fixed-strings -- "$CONTAINS" "$TMP_BODY"; then
+    echo "[FAIL] Body does not contain expected text: $CONTAINS" >&2
+    RESULT=1
+  else
+    echo "[OK] Body contains: $CONTAINS"
+  fi
+fi
+
+echo "Response body:\n$BODY"
+
+if [[ $KEEP -eq 1 ]]; then
+  echo "Keeping container running: $CONTAINER_NAME (http://localhost:$HOST_PORT)"
+else
+  docker stop "$CONTAINER_NAME" >/dev/null
+fi
+
+exit $RESULT
+

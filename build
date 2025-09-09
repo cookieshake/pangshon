@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ${1:-} == "-h" || ${1:-} == "--help" || $# -lt 1 ]]; then
+  cat <<'USAGE'
+Usage: build <directory> [--name <image>] [--platform <linux/amd64|linux/arm64>] [--progress <auto|plain|tty>]
+
+Build an OCI image from the given source directory using railpack + BuildKit.
+
+Examples:
+  build template-python
+  build template-python --name my-func --platform linux/arm64
+USAGE
+  exit 0
+fi
+
+DIR="$1"; shift || true
+IMAGE_NAME="$(basename "$DIR")"
+PLATFORM=""
+PROGRESS="${PROGRESS:-auto}"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -n|--name)
+      IMAGE_NAME="$2"; shift 2 ;;
+    --platform)
+      PLATFORM="$2"; shift 2 ;;
+    --progress)
+      PROGRESS="$2"; shift 2 ;;
+    *)
+      echo "Unknown option: $1" >&2; exit 1 ;;
+  esac
+done
+
+if ! command -v railpack >/dev/null 2>&1; then
+  echo "railpack not found. Install it:"
+  echo "  curl -fsSL https://raw.githubusercontent.com/railwayapp/railpack/main/install.sh | bash" >&2
+  exit 1
+fi
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "docker not found. Please install and start Docker." >&2
+  exit 1
+fi
+
+# Ensure a BuildKit daemon is running and env set
+if ! docker ps --format '{{.Names}}' | grep -q '^buildkit$'; then
+  echo "Starting BuildKit daemon (docker-container://buildkit)..."
+  docker run --rm --privileged -d --name buildkit moby/buildkit >/dev/null
+fi
+export BUILDKIT_HOST="docker-container://buildkit"
+
+cmd=(railpack build "$DIR" --name "$IMAGE_NAME" --progress "$PROGRESS")
+[[ -n "$PLATFORM" ]] && cmd+=(--platform "$PLATFORM")
+
+echo "Building image '$IMAGE_NAME' from '$DIR'..."
+echo "→ ${cmd[*]}"
+"${cmd[@]}"
+
