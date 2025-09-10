@@ -3,8 +3,8 @@
   "manifest": {
     "version": 1,
     "install": {
-      "func": {
-        "pkg-path": "func"
+      "hatch": {
+        "pkg-path": "hatch"
       },
       "python313": {
         "pkg-path": "python313"
@@ -26,116 +26,120 @@
   },
   "packages": [
     {
-      "attr_path": "func",
+      "attr_path": "hatch",
       "broken": false,
-      "derivation": "/nix/store/kvyrmsfc5sya0c1qabc3l4jvzidmqblg-func-1.16.2.drv",
-      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
-      "install_id": "func",
-      "license": "Apache-2.0",
+      "derivation": "/nix/store/vg67x1r3vb3i3nz7dmwxabfx7mya8k07-hatch-1.14.1.drv",
+      "description": "Modern, extensible Python project manager",
+      "install_id": "hatch",
+      "license": "MIT",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "func-1.16.2",
-      "pname": "func",
+      "name": "hatch-1.14.1",
+      "pname": "hatch",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:40:12.462985Z",
+      "scrape_date": "2025-09-08T03:40:55.295991Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "1.16.2",
+      "version": "1.14.1",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/q8524p7qza7q3chib6r0y30krghx4r1q-func-1.16.2"
+        "dist": "/nix/store/95776l45v09cqm98szidhcfp11r29nh2-hatch-1.14.1-dist",
+        "out": "/nix/store/9zg27cnj5arnws2kyg9g8v1rgwpblqbh-hatch-1.14.1"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "func",
+      "attr_path": "hatch",
       "broken": false,
-      "derivation": "/nix/store/k0pnyayf4hqfkwdmx5fi6djh8wn3fhk6-func-1.16.2.drv",
-      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
-      "install_id": "func",
-      "license": "Apache-2.0",
+      "derivation": "/nix/store/6r7llvsir77ryvfkhs2a7mkwr297p920-hatch-1.14.1.drv",
+      "description": "Modern, extensible Python project manager",
+      "install_id": "hatch",
+      "license": "MIT",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "func-1.16.2",
-      "pname": "func",
+      "name": "hatch-1.14.1",
+      "pname": "hatch",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:52:22.287362Z",
+      "scrape_date": "2025-09-08T03:52:39.229925Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "1.16.2",
+      "version": "1.14.1",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/p7d3cs2kzvj27xjiy7virvh0jfqlr3l4-func-1.16.2"
+        "dist": "/nix/store/99pwwgl53gmiwg83bgdi6inq3f8vm1gq-hatch-1.14.1-dist",
+        "out": "/nix/store/rikainghpafs1arcard98kpdl8lh3w10-hatch-1.14.1"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "func",
+      "attr_path": "hatch",
       "broken": false,
-      "derivation": "/nix/store/pxjqdi9q83nzjmn8bifsd43v25bn978v-func-1.16.2.drv",
-      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
-      "install_id": "func",
-      "license": "Apache-2.0",
+      "derivation": "/nix/store/ygb4qvr7v5ck3si959ddk1b2ydnvyqac-hatch-1.14.1.drv",
+      "description": "Modern, extensible Python project manager",
+      "install_id": "hatch",
+      "license": "MIT",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "func-1.16.2",
-      "pname": "func",
+      "name": "hatch-1.14.1",
+      "pname": "hatch",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:22:02.341942Z",
+      "scrape_date": "2025-09-08T04:22:16.682810Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "1.16.2",
+      "version": "1.14.1",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/nmpsssp9sg0rj21qmh2ij2nqsfq7h9nv-func-1.16.2"
+        "dist": "/nix/store/g48g90n312nryfapkw5ld18y4i0s75zd-hatch-1.14.1-dist",
+        "out": "/nix/store/ygznasvwh4agc318ddsn6ip52nkfdzp8-hatch-1.14.1"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "func",
+      "attr_path": "hatch",
       "broken": false,
-      "derivation": "/nix/store/c4nrhccv955mz6pclg126j5j3kfra96q-func-1.16.2.drv",
-      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
-      "install_id": "func",
-      "license": "Apache-2.0",
+      "derivation": "/nix/store/z7pz4p9pa4ci83bbbw8b3jq5zdxx93p1-hatch-1.14.1.drv",
+      "description": "Modern, extensible Python project manager",
+      "install_id": "hatch",
+      "license": "MIT",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "func-1.16.2",
-      "pname": "func",
+      "name": "hatch-1.14.1",
+      "pname": "hatch",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:54:30.878011Z",
+      "scrape_date": "2025-09-08T04:54:47.618021Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "1.16.2",
+      "version": "1.14.1",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/anqdg3f6qcdiblgacb8xmx800sl8x0rr-func-1.16.2"
+        "dist": "/nix/store/l1639xz1hmyra514yr48lc89a3anixq0-hatch-1.14.1-dist",
+        "out": "/nix/store/bcy88ghmjr9n6g81vifn0qqz941fgc6w-hatch-1.14.1"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
