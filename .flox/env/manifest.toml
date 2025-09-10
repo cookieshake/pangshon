@@ -17,7 +17,7 @@ version = 1
 [install]
 python313.pkg-path = "python313"
 uv.pkg-path = "uv"
-pack.pkg-path = "pack"
+func.pkg-path = "func"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 

@@ -3,8 +3,8 @@
   "manifest": {
     "version": 1,
     "install": {
-      "pack": {
-        "pkg-path": "pack"
+      "func": {
+        "pkg-path": "func"
       },
       "python313": {
         "pkg-path": "python313"
@@ -26,116 +26,116 @@
   },
   "packages": [
     {
-      "attr_path": "pack",
+      "attr_path": "func",
       "broken": false,
-      "derivation": "/nix/store/64xbcjfyjp69ixfnnwxjpwfrsnc9zxnx-pack-0.38.2.drv",
-      "description": "CLI for building apps using Cloud Native Buildpacks",
-      "install_id": "pack",
+      "derivation": "/nix/store/kvyrmsfc5sya0c1qabc3l4jvzidmqblg-func-1.16.2.drv",
+      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
+      "install_id": "func",
       "license": "Apache-2.0",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "pack-0.38.2",
-      "pname": "pack",
+      "name": "func-1.16.2",
+      "pname": "func",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:41:07.578714Z",
+      "scrape_date": "2025-09-08T03:40:12.462985Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.38.2",
+      "version": "1.16.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/r6a0mjgmxjp9ws8c1lj6x1xsp967licc-pack-0.38.2"
+        "out": "/nix/store/q8524p7qza7q3chib6r0y30krghx4r1q-func-1.16.2"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "pack",
+      "attr_path": "func",
       "broken": false,
-      "derivation": "/nix/store/4f461d0yyax0a46n2h89p4bapw13pign-pack-0.38.2.drv",
-      "description": "CLI for building apps using Cloud Native Buildpacks",
-      "install_id": "pack",
+      "derivation": "/nix/store/k0pnyayf4hqfkwdmx5fi6djh8wn3fhk6-func-1.16.2.drv",
+      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
+      "install_id": "func",
       "license": "Apache-2.0",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "pack-0.38.2",
-      "pname": "pack",
+      "name": "func-1.16.2",
+      "pname": "func",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:53:03.948686Z",
+      "scrape_date": "2025-09-08T03:52:22.287362Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.38.2",
+      "version": "1.16.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/isng3mkvbv65kkwmyvh7y3wfa221xxj7-pack-0.38.2"
+        "out": "/nix/store/p7d3cs2kzvj27xjiy7virvh0jfqlr3l4-func-1.16.2"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "pack",
+      "attr_path": "func",
       "broken": false,
-      "derivation": "/nix/store/izky8bx7hilc0as6jklphsyqa1l4yf38-pack-0.38.2.drv",
-      "description": "CLI for building apps using Cloud Native Buildpacks",
-      "install_id": "pack",
+      "derivation": "/nix/store/pxjqdi9q83nzjmn8bifsd43v25bn978v-func-1.16.2.drv",
+      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
+      "install_id": "func",
       "license": "Apache-2.0",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "pack-0.38.2",
-      "pname": "pack",
+      "name": "func-1.16.2",
+      "pname": "func",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:22:29.535674Z",
+      "scrape_date": "2025-09-08T04:22:02.341942Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.38.2",
+      "version": "1.16.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/i1grnyv5m03apzhl3chbrz2ax38i1n05-pack-0.38.2"
+        "out": "/nix/store/nmpsssp9sg0rj21qmh2ij2nqsfq7h9nv-func-1.16.2"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "pack",
+      "attr_path": "func",
       "broken": false,
-      "derivation": "/nix/store/2sv82x2w92fb4dzz6rvydcjpkm1qvgwi-pack-0.38.2.drv",
-      "description": "CLI for building apps using Cloud Native Buildpacks",
-      "install_id": "pack",
+      "derivation": "/nix/store/c4nrhccv955mz6pclg126j5j3kfra96q-func-1.16.2.drv",
+      "description": "Knative client library and CLI for creating, building, and deploying Knative Functions",
+      "install_id": "func",
       "license": "Apache-2.0",
       "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "pack-0.38.2",
-      "pname": "pack",
+      "name": "func-1.16.2",
+      "pname": "func",
       "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
       "rev_count": 856926,
       "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:55:15.669018Z",
+      "scrape_date": "2025-09-08T04:54:30.878011Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.38.2",
+      "version": "1.16.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/gy0mf23pfm340l3fag5pi658k4z010bl-pack-0.38.2"
+        "out": "/nix/store/anqdg3f6qcdiblgacb8xmx800sl8x0rr-func-1.16.2"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
